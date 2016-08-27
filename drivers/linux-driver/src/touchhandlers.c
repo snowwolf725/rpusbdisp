@@ -20,8 +20,7 @@
 static struct input_dev * _default_input_dev;
 static volatile int _live_flag;
 
-static int _on_create_input_dev(struct input_dev ** inputdev)
-{
+static int _on_create_input_dev(struct input_dev ** inputdev) {
     *inputdev = input_allocate_device();
 
     if (!inputdev) {
@@ -43,43 +42,40 @@ static int _on_create_input_dev(struct input_dev ** inputdev)
     return input_register_device((*inputdev));
 }
 
-static void _on_release_input_dev(struct input_dev * inputdev)
-{
-    
+static void _on_release_input_dev(struct input_dev * inputdev) {
     input_unregister_device(inputdev);
 }
 
 
-int __init register_touch_handler(void)
-{
+int __init register_touch_handler(void) {
     int ret = _on_create_input_dev(&_default_input_dev);
-    if (!ret) _live_flag = 1;
+    if (!ret) {
+      _live_flag = 1;
+    }
     return ret;
 }
 
-void unregister_touch_handler(void)
-{
+void unregister_touch_handler(void) {
     _live_flag = 0;
     _on_release_input_dev(_default_input_dev);
     _default_input_dev = NULL;
 }
 
 
-int touchhandler_on_new_device(struct rpusbdisp_dev * dev)
-{
+int touchhandler_on_new_device(struct rpusbdisp_dev * dev) {
     // singleton design
     return 0;
 }
 
-void touchhandler_on_remove_device(struct rpusbdisp_dev * dev)
-{
+void touchhandler_on_remove_device(struct rpusbdisp_dev * dev) {
     // singleton design
 }
 
 
-void touchhandler_send_ts_event(struct rpusbdisp_dev * dev, int x, int y, int touch)
-{
-    if (!_default_input_dev || !_live_flag) return;
+void touchhandler_send_ts_event(struct rpusbdisp_dev * dev, int x, int y, int touch) {
+    if (!_default_input_dev || !_live_flag) {
+		return;
+    }
     if (touch) {
         input_report_abs(_default_input_dev,ABS_X, x);
         input_report_abs(_default_input_dev,ABS_Y, y);

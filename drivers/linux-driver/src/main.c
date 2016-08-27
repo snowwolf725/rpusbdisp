@@ -24,7 +24,7 @@ static const struct file_operations lcd_fops = {
         .read =         lcd_read,
         .write =        lcd_write,
         .open =         lcd_open,
-	.unlocked_ioctl = lcd_ioctl,
+	    .unlocked_ioctl = lcd_ioctl,
         .release =      lcd_release,
         .llseek =	 noop_llseek,
 };
@@ -48,17 +48,17 @@ MODULE_PARM_DESC(fps,"Specify the frame rate used to refresh the display (overri
 
 static int __init usb_disp_init(void)
 {
-	int result;
+	int result = 0;
 
-        if (fps == 0) {
-	    /* frame rate is not set through the modprobe command. Use the value defined in the .config */
+    if (fps == 0) {
+	/* frame rate is not set through the modprobe command. Use the value defined in the .config */
 #ifdef CONFIG_RPUSBDISP_FPS
-	    fps = CONFIG_RPUSBDISP_FPS;
+		fps = CONFIG_RPUSBDISP_FPS;
 #else
 	    /* Just in case for background compliance. Maybe the Kconfig file of the driver is not integrated */
-            fps = 16;
+        fps = 16;
 #endif
-        }
+    }
 
     do {
 	    
@@ -80,9 +80,7 @@ static int __init usb_disp_init(void)
             break;
         }
 
-
-
-    }while(0);
+    } while(0);
 
 	return result;
 }

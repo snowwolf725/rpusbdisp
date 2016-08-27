@@ -35,12 +35,12 @@
 #include <linux/input.h>
 #include <linux/wait.h>
 
-#include "inc/types.h"
-#include "inc/drvconf.h"
-#include "inc/devconf.h"
+#include "types.h"
+#include "drvconf.h"
+#include "devconf.h"
 
 
-#include "inc/protocol.h"
+#include "protocol.h"
 
 extern int fps;
 
