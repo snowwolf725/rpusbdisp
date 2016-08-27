@@ -22,11 +22,13 @@ How to Integrate the Driver in the Kernel build operation
        * source "drivers/video/robopeak/Kconfig"
        after the line
        * comment "Frame buffer hardware drivers"
-    4) Change the .config of your kernel through the menuconfig
+    4) Edit the Makefile file in the drivers/video file and insert the line
+       * obj-$(CONFIG_FB_RPUSBDISP)        += robopeak/
+    5) Change the .config of your kernel through the menuconfig
        * make ARCH=your_architecture your_defconfig menuconfig
-    5) In the menu "Device Drivers -> Graphic supports -> Support for frame buffer display" a Robopeak USB Display menu appears
-    6) Set the Robopeak USB Display as module (this selection activates automatically the requested frame buffer option, see Prerequites of How to build the Linux Kernel Driver chapter)
-    7) Generate your kernel
+    6) In the menu "Device Drivers -> Graphic supports -> Support for frame buffer display" a Robopeak USB Display menu appears
+    7) Set the Robopeak USB Display as module (this selection activates automatically the requested frame buffer option, see Prerequites of How to build the Linux Kernel Driver chapter)
+    8) Generate your kernel
 
 
 
